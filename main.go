@@ -83,7 +83,7 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 				firstTurnFinished = true
 			}
 
-			if lidarReading > 130 && firstSideFinished && firstTurnFinished {
+			if lidarReading < 130 && firstSideFinished && firstTurnFinished {
 				secondSideStart = true
 			}
 
