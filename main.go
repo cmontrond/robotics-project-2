@@ -41,7 +41,7 @@ func Stop(gopigo3 *g.Driver) {
 
 func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver, rightLightSensor *aio.GroveLightSensorDriver, lidarSensor *i2c.LIDARLiteDriver) {
 
-	// We know that when it's under 150, it's close enough
+	// We know that when it's under 130, it's close enough
 	// You will need to use the wheel size to get
 
 	firstSideStart := false
@@ -67,15 +67,15 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 
 			println("Lidar Sensor Value:", lidarReading)
 
-			if lidarReading < 150 && !firstSideStart {
+			if lidarReading < 130 && !firstSideStart {
 				firstSideStart = true
 			}
 
-			if lidarReading > 150 && firstSideStart && !firstSideFinished {
+			if lidarReading > 130 && firstSideStart && !firstSideFinished {
 				firstSideFinished = true
 			}
 
-			if lidarReading > 150 && firstSideStart && firstSideFinished {
+			if lidarReading > 130 && firstSideStart && firstSideFinished {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
@@ -83,11 +83,11 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 				firstTurnFinished = true
 			}
 
-			if lidarReading > 150 && firstSideFinished && firstTurnFinished {
+			if lidarReading > 130 && firstSideFinished && firstTurnFinished {
 				secondSideStart = true
 			}
 
-			if lidarReading > 150 && secondSideStart && !secondSideFinished {
+			if lidarReading > 130 && secondSideStart && !secondSideFinished {
 				secondSideFinished = true
 				finished = true
 			}
