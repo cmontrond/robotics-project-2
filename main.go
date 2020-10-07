@@ -10,7 +10,30 @@ import (
 	"time"
 )
 
+const (
+	SPEED = 80
+)
+
+func Forward(gopigo3 *g.Driver, speed int) {
+	err := gopigo3.SetMotorDps(g.MOTOR_LEFT+g.MOTOR_RIGHT, speed)
+	if err != nil {
+		fmt.Errorf("Error moving the robot forward: %+v", err)
+	}
+}
+func Stop(gopigo3 *g.Driver) {
+	err := gopigo3.SetMotorDps(g.MOTOR_LEFT+g.MOTOR_RIGHT, 0)
+	if err != nil {
+		fmt.Errorf("Error stopping the robot: %+v", err)
+	}
+}
+
 func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver, rightLightSensor *aio.GroveLightSensorDriver, lidarSensor *i2c.LIDARLiteDriver) {
+
+	// We know that when it's under 100, it's close enough
+	// You will need to use the wheel size to get
+
+	started := false
+	finished := false
 
 	err := lidarSensor.Start()
 	if err != nil {
@@ -18,15 +41,30 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 	}
 
 	for {
-		lidarReading, err := lidarSensor.Distance()
-		if err != nil {
-			fmt.Println("Error reading lidar sensor %+v", err)
-		}
-		message := fmt.Sprintf("Lidar Reading: %d", lidarReading)
 
-		fmt.Println(lidarReading)
-		fmt.Println(message)
-		time.Sleep(time.Second * 3)
+		if !finished {
+			lidarReading, err := lidarSensor.Distance()
+
+			if err != nil {
+				fmt.Println("Error reading lidar sensor %+v", err)
+			}
+
+			fmt.Printf("Lidar Sensor Value: %v", lidarReading)
+
+			if lidarReading < 100 && !started {
+				started = true
+			}
+
+			if lidarReading > 100 && started && !finished {
+				finished = true
+			}
+
+			Forward(gopigo3, -SPEED)
+
+			time.Sleep(time.Second)
+		}
+
+		Stop(gopigo3)
 	}
 }
 
@@ -43,7 +81,7 @@ func main() {
 		robotRunLoop(gopigo3, leftLightSensor, rightLightSensor, lidarSensor)
 	}
 
-	robot := gobot.NewRobot("miniProject",
+	robot := gobot.NewRobot("Project 2",
 		[]gobot.Connection{raspiAdaptor},
 		[]gobot.Device{gopigo3, leftLightSensor, rightLightSensor, lidarSensor},
 		mainRobotFunc,
