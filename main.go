@@ -49,7 +49,7 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 				fmt.Println("Error reading lidar sensor %+v", err)
 			}
 
-			println("Lidar Sensor Value: %v", lidarReading)
+			println("Lidar Sensor Value:", lidarReading)
 
 			if lidarReading < 100 && !started {
 				started = true
