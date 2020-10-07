@@ -57,7 +57,7 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 
 		time.Sleep(time.Second)
 		SpinRight(gopigo3, SPEED)
-		time.Sleep(time.Second * (3 / 2))
+		time.Sleep(time.Second * 2)
 		Forward(gopigo3, -SPEED)
 		time.Sleep(time.Second * 10)
 
