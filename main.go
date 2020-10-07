@@ -20,6 +20,18 @@ func Forward(gopigo3 *g.Driver, speed int) {
 		fmt.Errorf("Error moving the robot forward: %+v", err)
 	}
 }
+
+func SpinRight(gopigo3 *g.Driver, speed int) {
+	err := gopigo3.SetMotorDps(g.MOTOR_LEFT, speed)
+	if err != nil {
+		fmt.Errorf("Error moving the robot backward: %+v", err)
+	}
+	err = gopigo3.SetMotorDps(g.MOTOR_RIGHT, speed*-1)
+	if err != nil {
+		fmt.Errorf("Error moving the robot backward: %+v", err)
+	}
+}
+
 func Stop(gopigo3 *g.Driver) {
 	err := gopigo3.SetMotorDps(g.MOTOR_LEFT+g.MOTOR_RIGHT, 0)
 	if err != nil {
@@ -32,39 +44,50 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 	// We know that when it's under 100, it's close enough
 	// You will need to use the wheel size to get
 
-	started := false
-	finished := false
+	//firstSideStart := false
+	//firstSideFinished := false
+	//finished := false
 
-	err := lidarSensor.Start()
-	if err != nil {
-		fmt.Println("error starting lidarSensor")
-	}
+	//err := lidarSensor.Start()
+	//if err != nil {
+	//	fmt.Println("error starting lidarSensor")
+	//}
 
 	for {
 
-		if !finished {
-			lidarReading, err := lidarSensor.Distance()
+		time.Sleep(time.Second)
+		SpinRight(gopigo3, SPEED)
+		time.Sleep(time.Second * 2)
+		Forward(gopigo3, -SPEED)
+		time.Sleep(time.Second * 3)
 
-			if err != nil {
-				fmt.Println("Error reading lidar sensor %+v", err)
-			}
-
-			println("Lidar Sensor Value:", lidarReading)
-
-			if lidarReading < 100 && !started {
-				started = true
-			}
-
-			if lidarReading > 100 && started && !finished {
-				finished = true
-			}
-
-			Forward(gopigo3, -SPEED)
-
-			time.Sleep(time.Second)
-		}
-
-		Stop(gopigo3)
+		//if !finished {
+		//	lidarReading, err := lidarSensor.Distance()
+		//
+		//	if err != nil {
+		//		fmt.Println("Error reading lidar sensor %+v", err)
+		//	}
+		//
+		//	println("Lidar Sensor Value:", lidarReading)
+		//
+		//	if lidarReading < 100 && !firstSideStart {
+		//		firstSideStart = true
+		//	}
+		//
+		//	if lidarReading > 100 && firstSideStart && !firstSideFinished {
+		//		firstSideFinished = true
+		//	}
+		//
+		//	if lidarReading > 100 && firstSideStart && firstSideFinished {
+		//
+		//	}
+		//
+		//	Forward(gopigo3, -SPEED)
+		//
+		//	time.Sleep(time.Second)
+		//}
+		//
+		//Stop(gopigo3)
 	}
 }
 
