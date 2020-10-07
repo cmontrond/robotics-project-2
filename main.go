@@ -59,7 +59,7 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 		SpinRight(gopigo3, SPEED)
 		time.Sleep(time.Second * (3 / 2))
 		Forward(gopigo3, -SPEED)
-		time.Sleep(time.Second * 3)
+		time.Sleep(time.Second * 10)
 
 		//if !finished {
 		//	lidarReading, err := lidarSensor.Distance()
