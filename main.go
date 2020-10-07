@@ -75,7 +75,7 @@ func robotRunLoop(gopigo3 *g.Driver, leftLightSensor *aio.GroveLightSensorDriver
 				firstSideFinished = true
 			}
 
-			if lidarReading > 130 && firstSideStart && firstSideFinished && !firstTurnFinished {
+			if lidarReading > 100 && firstSideStart && firstSideFinished && !firstTurnFinished {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
