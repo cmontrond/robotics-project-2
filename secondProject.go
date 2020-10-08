@@ -38,6 +38,10 @@ func Stop(gopigo3 *g.Driver) {
 	}
 }
 
+func workingCode() {
+
+}
+
 func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 	// We know that when it's under 130, it's close enough
@@ -48,7 +52,12 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	firstTurnFinished := false
 	secondSideStart := false
 	secondSideFinished := false
-	finished := false
+	secondTurnFinished := false
+	thirdSideStart := false
+	thirdSideFinished := false
+	thirdTurnFinished := false
+	fourthSideStart := false
+	fourthSideFinished := false
 
 	err := lidarSensor.Start()
 	if err != nil {
@@ -57,7 +66,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 	for {
 
-		if !finished {
+		if !fourthSideFinished {
 			lidarReading, err := lidarSensor.Distance()
 
 			if err != nil {
@@ -90,16 +99,39 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				secondSideFinished = true
 			}
 
-			if lidarReading > 100 && firstSideStart && firstSideFinished && !firstTurnFinished {
+			if lidarReading > 100 && secondSideFinished && !secondTurnFinished {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
 				time.Sleep(time.Millisecond * 2200)
-				firstTurnFinished = true
+				secondTurnFinished = true
+			}
+
+			if lidarReading < 130 && secondSideFinished && secondTurnFinished {
+				thirdSideStart = true
+			}
+
+			if lidarReading > 130 && thirdSideStart && !thirdSideFinished {
+				thirdSideFinished = true
+			}
+
+			if lidarReading > 100 && thirdSideFinished && !thirdTurnFinished {
+				Forward(gopigo3, -SPEED)
+				time.Sleep(time.Second * 2)
+				SpinRight(gopigo3, SPEED)
+				time.Sleep(time.Millisecond * 2200)
+				thirdTurnFinished = true
+			}
+
+			if lidarReading < 130 && thirdSideFinished && thirdTurnFinished {
+				fourthSideStart = true
+			}
+
+			if lidarReading > 130 && fourthSideStart && !fourthSideFinished {
+				fourthSideFinished = true
 			}
 
 			Forward(gopigo3, -SPEED)
-
 			time.Sleep(time.Second)
 		}
 
