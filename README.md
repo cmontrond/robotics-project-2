@@ -2,14 +2,14 @@
 
 Second Project for COMP 570: Robotics at Bridgewater State University.<br>
 
-This project aims to create a robot, and a program that that measures a box.
-By doing this project, the student will continue gaining experience doing sensor/effector fusion, using sensor data 
-to drive behavior, using new sensors and control mechanisms.
+This project aims to create a robot, and a program that measures a box.
+By doing this project, the student will continue gaining experience doing sensor/effector fusion, using sensor data and
+different control mechanisms to drive behavior.
 
 ## Details
 
-* The robot will start near an object in the world (A box) 
-* The robot needs to travel along the box using some form of feedback control (not proportionalbut PI, PD, or PID
+* The robot will start near an object in the world (a box) 
+* The robot needs to travel along the box using some form of feedback control (not proportional, but PI, PD, or PID)
 * The robot needs to measure the box as it goes using the encoders on the motors (there are constants in 
 the gopigo3 package for the wheel circumference.)
 * The robot needs to go all the way around the box, get both length readings, both width 
