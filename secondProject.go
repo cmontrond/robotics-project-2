@@ -89,6 +89,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				SpinRight(gopigo3, SPEED)
 				time.Sleep(time.Millisecond * 2200)
 				firstTurnFinished = true
+				println("Finished First Turn")
 			}
 
 			if lidarReading < 130 && firstSideFinished && firstTurnFinished {
@@ -105,6 +106,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				SpinRight(gopigo3, SPEED)
 				time.Sleep(time.Millisecond * 2200)
 				secondTurnFinished = true
+				println("Finished First Turn")
 			}
 
 			if lidarReading < 130 && secondSideFinished && secondTurnFinished {
@@ -121,6 +123,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				SpinRight(gopigo3, SPEED)
 				time.Sleep(time.Millisecond * 2200)
 				thirdTurnFinished = true
+				println("Finished First Turn")
 			}
 
 			if lidarReading < 130 && thirdSideFinished && thirdTurnFinished {
@@ -129,6 +132,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 130 && fourthSideStart && !fourthSideFinished {
 				fourthSideFinished = true
+				println("FinisheD")
 			}
 
 			Forward(gopigo3, -SPEED)
