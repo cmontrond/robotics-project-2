@@ -44,7 +44,7 @@ func workingCode() {
 
 func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
-	// We know that when it's under 130, it's close enough
+	// We know that when it's under 105, it's close enough
 	// You will need to use the wheel size to get
 
 	firstSideStart := false
@@ -75,11 +75,11 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			println("Lidar Sensor Value:", lidarReading)
 
-			if lidarReading < 130 && !firstSideStart {
+			if lidarReading < 105 && !firstSideStart {
 				firstSideStart = true
 			}
 
-			if lidarReading > 130 && firstSideStart && !firstSideFinished {
+			if lidarReading > 105 && firstSideStart && !firstSideFinished {
 				firstSideFinished = true
 			}
 
@@ -92,11 +92,11 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				println("Finished First Turn")
 			}
 
-			if lidarReading < 130 && firstSideFinished && firstTurnFinished {
+			if lidarReading < 105 && firstSideFinished && firstTurnFinished {
 				secondSideStart = true
 			}
 
-			if lidarReading > 130 && secondSideStart && !secondSideFinished {
+			if lidarReading > 105 && secondSideStart && !secondSideFinished {
 				secondSideFinished = true
 			}
 
@@ -109,11 +109,11 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				println("Finished First Turn")
 			}
 
-			if lidarReading < 130 && secondSideFinished && secondTurnFinished {
+			if lidarReading < 105 && secondSideFinished && secondTurnFinished {
 				thirdSideStart = true
 			}
 
-			if lidarReading > 130 && thirdSideStart && !thirdSideFinished {
+			if lidarReading > 105 && thirdSideStart && !thirdSideFinished {
 				thirdSideFinished = true
 			}
 
@@ -126,11 +126,11 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				println("Finished First Turn")
 			}
 
-			if lidarReading < 130 && thirdSideFinished && thirdTurnFinished {
+			if lidarReading < 105 && thirdSideFinished && thirdTurnFinished {
 				fourthSideStart = true
 			}
 
-			if lidarReading > 130 && fourthSideStart && !fourthSideFinished {
+			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
 				fourthSideFinished = true
 				println("FinisheD")
 			}
