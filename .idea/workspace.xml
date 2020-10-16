@@ -308,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602884496957</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fix measurement error for the remaining sides">
+      <created>1602884998394</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1602884998394</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,18 +340,19 @@
     <MESSAGE value="add newline to print statements" />
     <MESSAGE value="add formatting to final output" />
     <MESSAGE value="format float values" />
-    <option name="LAST_COMMIT_MESSAGE" value="format float values" />
+    <MESSAGE value="fix measurement error for the remaining sides" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix measurement error for the remaining sides" />
   </component>
   <component name="WindowStateProjectService">
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1602802761443">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602802761443" />
-    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1602884496586">
+    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1602884998039">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197702040" />
-    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1602884496586" />
+    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1602884998039" />
     <state x="626" y="310" key="Github.ShareDialog" timestamp="1602086518174">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -353,10 +361,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="545" y="117" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602086522831" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602884499253">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602885000179">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197704238" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602884499253" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602885000179" />
   </component>
 </project>
