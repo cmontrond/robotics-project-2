@@ -227,8 +227,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				fourthSideLength = math.Abs(encodersVal - fourthSideStartEncodersVal)
 			}
 
-			encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-			fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
+			//encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+			//fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
 
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
@@ -237,10 +237,10 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			Stop(gopigo3)
 			BlinkLED(gopigo3)
 			println("====================================\n\n")
-			fmt.Printf("First side length (in cm): %.2f\n", firstSideLength)
-			fmt.Printf("Second side length (in cm): %.2f\n", secondSideLength)
-			fmt.Printf("Third side length (in cm): %.2f\n", thirdSideLength)
-			fmt.Printf("Fourth side length (in cm): %.2f\n\n", fourthSideLength)
+			fmt.Printf("First side length: %.2f cm\n", firstSideLength)
+			fmt.Printf("Second side length: %.2f cm\n", secondSideLength)
+			fmt.Printf("Third side length: %.2f cm\n", thirdSideLength)
+			fmt.Printf("Fourth side length: %.2f cm\n\n", fourthSideLength)
 			println("====================================\n\n")
 		}
 	}
