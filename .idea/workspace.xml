@@ -273,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602882573045</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="fix float formatting">
+      <created>1602882922735</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1602882922735</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,18 +300,19 @@
     <MESSAGE value="add encoders logic" />
     <MESSAGE value="add todos" />
     <MESSAGE value="blink led after finishing" />
-    <option name="LAST_COMMIT_MESSAGE" value="blink led after finishing" />
+    <MESSAGE value="fix float formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix float formatting" />
   </component>
   <component name="WindowStateProjectService">
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1602802761443">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602802761443" />
-    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1602882572660">
+    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1602882922371">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197702040" />
-    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1602882572660" />
+    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1602882922371" />
     <state x="626" y="310" key="Github.ShareDialog" timestamp="1602086518174">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -313,10 +321,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="545" y="117" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602086522831" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602882574673">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602882924250">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197704238" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602882574673" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602882924250" />
   </component>
 </project>
