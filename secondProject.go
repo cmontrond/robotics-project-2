@@ -233,7 +233,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			fmt.Printf("First side length (in cm): %f\n", firstSideLength)
 			fmt.Printf("Second side length (in cm): %f\n", secondSideLength)
 			fmt.Printf("Third side length (in cm): %f\n", thirdSideLength)
-			fmt.Printf("Fourth side length (in cm): %f\n", fourthSideLength)
+			fmt.Printf("Fourth side length (in cm): %f\n\n", fourthSideLength)
+			println("====================================\n\n")
 		}
 	}
 }
