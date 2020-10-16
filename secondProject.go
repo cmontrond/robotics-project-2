@@ -138,7 +138,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if lidarReading > 105 && firstSideStart && !firstSideFinished {
 				firstSideFinished = true
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				println("FIRST SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				//println("FIRST SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				fmt.Printf("FIRST SIDE FINISHED: Encoders Value (in cm): %f", encodersVal)
 				// TODO: CALCULATE DIFFERENCE BETWEEN THIS ONE AND WHEN YOU STARTED THE FIRST SIDE
 			}
 
@@ -159,7 +160,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if lidarReading > 105 && secondSideStart && !secondSideFinished {
 				secondSideFinished = true
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				println("SECOND SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				//println("SECOND SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				fmt.Printf("SECOND SIDE FINISHED: Encoders Value (in cm): %f", encodersVal)
 				// TODO: CALCULATE DIFFERENCE BETWEEN THIS ONE AND WHEN YOU STARTED THE SECOND SIDE
 			}
 
@@ -180,7 +182,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if lidarReading > 105 && thirdSideStart && !thirdSideFinished {
 				thirdSideFinished = true
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				println("THIRD SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				//println("THIRD SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				fmt.Printf("THIRD SIDE FINISHED: Encoders Value (in cm): %f", encodersVal)
 				// TODO: CALCULATE DIFFERENCE BETWEEN THIS ONE AND WHEN YOU STARTED THE THIRD SIDE
 			}
 
@@ -202,12 +205,14 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				fourthSideFinished = true
 				println("Finished")
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				println("FOURTH SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				//println("FOURTH SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
+				fmt.Printf("FOURTH SIDE FINISHED: Encoders Value (in cm): %f", encodersVal)
 				// TODO: CALCULATE DIFFERENCE BETWEEN THIS ONE AND WHEN YOU STARTED THE FOURTH SIDE
 			}
 
 			encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-			println("Current Encoders Value (in cm): ", encodersVal)
+			//println("Current Encoders Value (in cm): ", encodersVal)
+			fmt.Printf("Current Encoders Value (in cm): %f", encodersVal)
 
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
