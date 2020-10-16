@@ -31,7 +31,7 @@ func SpinRight(gopigo3 *g.Driver, speed int) {
 	}
 }
 
-func readEnconders(gopigo3 *g.Driver) (int64, int64) {
+func ReadEnconders(gopigo3 *g.Driver) (int64, int64) {
 	leftEncoder, err := gopigo3.GetMotorEncoder(g.MOTOR_LEFT)
 
 	if err != nil {
@@ -45,6 +45,17 @@ func readEnconders(gopigo3 *g.Driver) (int64, int64) {
 	}
 
 	return leftEncoder, rightEncoder
+}
+
+func ReadEncodersAverage(gopigo3 *g.Driver, wheelCircumference float64) float64 {
+
+	left, right := ReadEnconders(gopigo3)
+
+	average := float64((left + right) / 2)
+
+	average = ((average / 360) * wheelCircumference) / 10
+
+	return average
 }
 
 func Stop(gopigo3 *g.Driver) {
