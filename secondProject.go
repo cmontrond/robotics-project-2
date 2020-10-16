@@ -47,6 +47,17 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	// We know that when it's under 105, it's close enough
 	// You will need to use the wheel size to get
 
+	// Proportional-Integral-Derivative (PID) controller
+	//pid := Pid {
+	//	Kp:            2.0,
+	//	Ki:            0.0,
+	//	Kd:            1.0,
+	//	Derivator:     0,
+	//	Integrator:    0,
+	//	IntegratorMax: 500,
+	//	IntegratorMin: 500,
+	//}
+
 	firstSideStart := false
 	firstSideFinished := false
 	firstTurnFinished := false
@@ -75,6 +86,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			println("Lidar Sensor Value:", lidarReading)
 
+			// FIRST SIDE
 			if lidarReading < 105 && !firstSideStart {
 				firstSideStart = true
 			}
@@ -92,6 +104,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				println("Finished First Turn")
 			}
 
+			// SECOND SIDE
 			if lidarReading < 105 && firstSideFinished && firstTurnFinished {
 				secondSideStart = true
 			}
@@ -109,6 +122,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				println("Finished First Turn")
 			}
 
+			// THIRD SIDE
 			if lidarReading < 105 && secondSideFinished && secondTurnFinished {
 				thirdSideStart = true
 			}
@@ -126,6 +140,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				println("Finished First Turn")
 			}
 
+			// FOURTH SIDE
 			if lidarReading < 105 && thirdSideFinished && thirdTurnFinished {
 				fourthSideStart = true
 			}

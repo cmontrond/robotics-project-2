@@ -13,9 +13,10 @@ type Pid struct {
 	Pvalue        float64
 	Dvalue        float64
 	Ivalue        float64
+	Pid           float64
 }
 
-func (pid *Pid) update(currentValue float64) float64 {
+func (pid *Pid) Update(currentValue float64) {
 
 	pid.Error = pid.SetPoint - currentValue
 
@@ -33,7 +34,11 @@ func (pid *Pid) update(currentValue float64) float64 {
 
 	pid.Ivalue = pid.Integrator * pid.Ki
 
-	PID := pid.Pvalue + pid.Ivalue + pid.Dvalue
+	pid.Pid = pid.Pvalue + pid.Ivalue + pid.Dvalue
+}
 
-	return PID
+func (pid *Pid) SetPointValue(setPoint float64) {
+	pid.SetPoint = setPoint
+	pid.Integrator = 0
+	pid.Derivator = 0
 }
