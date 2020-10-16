@@ -59,6 +59,22 @@ func ReadEncodersAverage(gopigo3 *g.Driver, wheelCircumference float64) float64 
 	return average
 }
 
+func BlinkLED(gopigo3 *g.Driver) {
+	err := gopigo3.SetLED(g.LED_EYE_RIGHT, 0x00, 0x00, 0xFF)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	time.Sleep(time.Second)
+
+	err = gopigo3.SetLED(g.LED_EYE_RIGHT, 0x00, 0x00, 0x00)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	time.Sleep(time.Second)
+}
+
 func Stop(gopigo3 *g.Driver) {
 	err := gopigo3.SetMotorDps(g.MOTOR_LEFT+g.MOTOR_RIGHT, 0)
 	if err != nil {
@@ -195,9 +211,11 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
-		}
 
-		Stop(gopigo3)
+		} else {
+			Stop(gopigo3)
+			BlinkLED(gopigo3)
+		}
 	}
 }
 
