@@ -31,15 +31,27 @@ func SpinRight(gopigo3 *g.Driver, speed int) {
 	}
 }
 
+func readEnconders(gopigo3 *g.Driver) (int64, int64) {
+	leftEncoder, err := gopigo3.GetMotorEncoder(g.MOTOR_LEFT)
+
+	if err != nil {
+		fmt.Errorf("Error reading left encoder: %+v", err)
+	}
+
+	rightEncoder, err := gopigo3.GetMotorEncoder(g.MOTOR_RIGHT)
+
+	if err != nil {
+		fmt.Errorf("Error reading right encoder: %+v", err)
+	}
+
+	return leftEncoder, rightEncoder
+}
+
 func Stop(gopigo3 *g.Driver) {
 	err := gopigo3.SetMotorDps(g.MOTOR_LEFT+g.MOTOR_RIGHT, 0)
 	if err != nil {
 		fmt.Errorf("Error stopping the robot: %+v", err)
 	}
-}
-
-func workingCode() {
-
 }
 
 func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
@@ -147,7 +159,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
 				fourthSideFinished = true
-				println("FinisheD")
+				println("Finished")
 			}
 
 			Forward(gopigo3, -SPEED)
