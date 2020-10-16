@@ -53,6 +53,7 @@ func ReadEncodersAverage(gopigo3 *g.Driver, wheelCircumference float64) float64 
 
 	average := float64((left + right) / 2)
 
+	// We want the return value in centimetres, so that's why we do this
 	average = ((average / 360) * wheelCircumference) / 10
 
 	return average
@@ -98,6 +99,10 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 		fmt.Println("error starting lidarSensor")
 	}
 
+	encodersVal := ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+
+	println("Initial Encoders Value (in cm): ", encodersVal)
+
 	for {
 
 		if !fourthSideFinished {
@@ -116,6 +121,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && firstSideStart && !firstSideFinished {
 				firstSideFinished = true
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("FIRST SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
 			}
 
 			if lidarReading > 100 && firstSideFinished && !firstTurnFinished {
@@ -134,6 +141,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && secondSideStart && !secondSideFinished {
 				secondSideFinished = true
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("SECOND SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
 			}
 
 			if lidarReading > 100 && secondSideFinished && !secondTurnFinished {
@@ -152,6 +161,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && thirdSideStart && !thirdSideFinished {
 				thirdSideFinished = true
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("THIRD SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
 			}
 
 			if lidarReading > 100 && thirdSideFinished && !thirdTurnFinished {
@@ -171,10 +182,16 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
 				fourthSideFinished = true
 				println("Finished")
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("FOURTH SIDE FINISHED: Encoders Value (in cm): ", encodersVal)
 			}
+
+			encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+			println("Current Encoders Value (in cm): ", encodersVal)
 
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
+
 		}
 
 		Stop(gopigo3)
