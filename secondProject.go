@@ -162,8 +162,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && firstSideStart && !firstSideFinished {
 				firstSideFinished = true
-				firstSideStart = true
 				Stop(gopigo3)
+				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 				fmt.Printf("FIRST SIDE FINISHED: Encoders Value (in cm): %.2f\n", encodersVal)
 				firstSideLength = math.Abs(encodersVal - firstSideStartEncodersVal)
@@ -188,8 +188,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && secondSideStart && !secondSideFinished {
 				secondSideFinished = true
-				firstSideStart = true
 				Stop(gopigo3)
+				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 				fmt.Printf("SECOND SIDE FINISHED: Encoders Value (in cm): %.2f\n", encodersVal)
 				secondSideLength = math.Abs(encodersVal - secondSideStartEncodersVal)
@@ -214,8 +214,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && thirdSideStart && !thirdSideFinished {
 				thirdSideFinished = true
-				firstSideStart = true
 				Stop(gopigo3)
+				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 				fmt.Printf("THIRD SIDE FINISHED: Encoders Value (in cm): %.2f\n", encodersVal)
 				thirdSideLength = math.Abs(encodersVal - thirdSideStartEncodersVal)
@@ -241,8 +241,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
 				fourthSideFinished = true
 				println("Finished")
-				firstSideStart = true
 				Stop(gopigo3)
+				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 				fmt.Printf("FOURTH SIDE FINISHED: Encoders Value (in cm): %.2f\n", encodersVal)
 				fourthSideLength = math.Abs(encodersVal - fourthSideStartEncodersVal)
