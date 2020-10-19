@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d8b7798-dcac-4c64-9629-e70a0c392360" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/secondProject.go" beforeDir="false" afterPath="$PROJECT_DIR$/secondProject.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -385,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603128762273</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="calculate error difference between the sides after stopping the robot">
+      <created>1603129006623</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1603129006623</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,11 +425,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602802761443" />
-    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1603128761634">
+    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1603129005975">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197702040" />
-    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1603128761634" />
+    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1603129005975" />
     <state x="626" y="310" key="Github.ShareDialog" timestamp="1602086518174">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -432,10 +438,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="545" y="117" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602086522831" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603128763638">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603129008096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197704238" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603128763638" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603129008096" />
   </component>
 </project>
