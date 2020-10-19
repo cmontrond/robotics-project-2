@@ -11,9 +11,10 @@ import (
 )
 
 const (
-	SPEED     = 80
-	TOO_CLOSE = 30
-	TOO_FAR   = 90
+	SPEED       = 80
+	TOO_CLOSE   = 30
+	TOO_FAR     = 90
+	SENSOR_SIZE = 4 // We use to discard extra cm in our final length calculation
 )
 
 func Forward(gopigo3 *g.Driver, speed int) {
