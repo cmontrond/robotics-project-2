@@ -106,6 +106,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	// width: 31cm // 39cm
 	// length: 41cm // 57cm
 
+	// third box: 43.5 / 40
+
 	firstSideStart := false
 	firstSideFinished := false
 	firstTurnFinished := false
