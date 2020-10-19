@@ -11,7 +11,9 @@ import (
 )
 
 const (
-	SPEED = 80
+	SPEED     = 80
+	TOO_CLOSE = 30
+	TOO_FAR   = 90
 )
 
 func Forward(gopigo3 *g.Driver, speed int) {
@@ -97,7 +99,11 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	//	Integrator:    0,
 	//	IntegratorMax: 500,
 	//	IntegratorMin: 500,
+	//	SetPoint: 60,
 	//}
+
+	// width: 31cm
+	// length: 41cm
 
 	firstSideStart := false
 	firstSideFinished := false
@@ -121,6 +127,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	thirdSideLength := 0.0
 	fourthSideLength := 0.0
 
+	// TODO: maybe have a turning boolean just so you don't do pid when turning. Maight not be necessary since you're doing turning in one bloc
+
 	err := lidarSensor.Start()
 	if err != nil {
 		fmt.Println("error starting lidarSensor")
@@ -128,7 +136,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 	encodersVal := ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 
-	println("Initial Encoders Value (in cm): ", encodersVal)
+	//println("Initial Encoders Value (in cm): ", encodersVal)
 
 	for {
 
@@ -140,6 +148,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			}
 
 			println("Lidar Sensor Value:", lidarReading)
+
+			// This is where PID logic should go?
 
 			// FIRST SIDE
 			if lidarReading < 105 && !firstSideStart {
@@ -230,6 +240,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			//encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 			//fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
 
+			// Here, should actually decide if you move a little bit to the left, right, or continue forward
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
 
