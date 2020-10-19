@@ -102,8 +102,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	//	SetPoint: 60,
 	//}
 
-	// width: 31cm
-	// length: 41cm
+	// width: 31cm // 39cm
+	// length: 41cm // 57cm
 
 	firstSideStart := false
 	firstSideFinished := false
@@ -154,6 +154,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// FIRST SIDE
 			if lidarReading < 105 && !firstSideStart {
 				firstSideStart = true
+				Stop(gopigo3)
+				time.Sleep(time.Second)
 				firstSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 			}
 
