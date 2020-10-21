@@ -269,6 +269,9 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			//fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
 
 			// Here, should actually decide if you move a little bit to the left, right, or continue forward
+			if pidEnabled {
+				// TODO: Do something here
+			}
 			fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
