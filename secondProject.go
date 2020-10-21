@@ -271,6 +271,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// Here, should actually decide if you move a little bit to the left, right, or continue forward
 			if pidEnabled {
 				// TODO: Do something here
+				println("PID is enabled")
 			}
 			println("DEBUG!!!!!")
 			fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
