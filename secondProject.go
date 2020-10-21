@@ -109,6 +109,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 	pid := NewPID(1, 1.0, 1.0, 0.0)
 	err := pid.SetTunings(1.0, 1.0, 0.0)
+	err = pid.SetOutputLimits(-1000.0, 1000.0)
 	err = pid.SetSampleTime(1) // sample time in seconds
 
 	firstSideStart := false
