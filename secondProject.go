@@ -107,6 +107,10 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 	// third box: 43.5 / 40
 
+	pid := NewPID(1, 1.0, 1.0, 0.0)
+	err := pid.SetTunings(1.0, 1.0, 0.0)
+	err = pid.SetSampleTime(1) // sample time in seconds
+
 	firstSideStart := false
 	firstSideFinished := false
 	firstTurnFinished := false
@@ -131,7 +135,10 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 	// TODO: maybe have a turning boolean just so you don't do pid when turning. Maight not be necessary since you're doing turning in one bloc
 
-	err := lidarSensor.Start()
+	pidEnabled := false
+	pidOutput := 0.0
+
+	err = lidarSensor.Start()
 	if err != nil {
 		fmt.Println("error starting lidarSensor")
 	}
@@ -152,10 +159,12 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			println("Lidar Sensor Value:", lidarReading)
 
 			// This is where PID logic should go?
+			pidOutput = pid.Compute(20.0, float64(lidarReading))
 
 			// FIRST SIDE
 			if lidarReading < 105 && !firstSideStart {
 				firstSideStart = true
+				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				firstSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
@@ -171,6 +180,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			}
 
 			if lidarReading > 100 && firstSideFinished && !firstTurnFinished {
+				pidEnabled = false
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
@@ -182,6 +192,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// SECOND SIDE
 			if lidarReading < 105 && firstSideFinished && firstTurnFinished && !secondSideStart {
 				secondSideStart = true
+				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				secondSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
@@ -197,6 +208,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			}
 
 			if lidarReading > 100 && secondSideFinished && !secondTurnFinished {
+				pidEnabled = false
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
@@ -208,6 +220,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// THIRD SIDE
 			if lidarReading < 105 && secondSideFinished && secondTurnFinished && !thirdSideStart {
 				thirdSideStart = true
+				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				thirdSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
@@ -223,6 +236,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			}
 
 			if lidarReading > 100 && thirdSideFinished && !thirdTurnFinished {
+				pidEnabled = false
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
@@ -234,12 +248,14 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// FOURTH SIDE
 			if lidarReading < 105 && thirdSideFinished && thirdTurnFinished && !fourthSideStart {
 				fourthSideStart = true
+				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				fourthSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 			}
 
 			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
+				pidEnabled = false
 				fourthSideFinished = true
 				println("Finished")
 				Stop(gopigo3)
@@ -253,6 +269,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			//fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
 
 			// Here, should actually decide if you move a little bit to the left, right, or continue forward
+			fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
 
