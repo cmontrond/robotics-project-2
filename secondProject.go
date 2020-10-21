@@ -280,6 +280,8 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	}
 
 	println("Lidar Sensor Value:", lidarReading)
+
+	time.Sleep(time.Second)
 }
 
 func main() {
