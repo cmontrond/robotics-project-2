@@ -273,15 +273,18 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	//workingCode(gopigo3, lidarSensor)
-	lidarReading, err := lidarSensor.Distance()
 
-	if err != nil {
-		fmt.Println("Error reading lidar sensor %+v", err)
+	for {
+		lidarReading, err := lidarSensor.Distance()
+
+		if err != nil {
+			fmt.Println("Error reading lidar sensor %+v", err)
+		}
+
+		println("Lidar Sensor Value:", lidarReading)
+
+		time.Sleep(time.Second)
 	}
-
-	println("Lidar Sensor Value:", lidarReading)
-
-	time.Sleep(time.Second)
 }
 
 func main() {
