@@ -2,10 +2,8 @@ package main
 
 import (
 	"fmt"
-	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/i2c"
 	g "gobot.io/x/gobot/platforms/dexter/gopigo3"
-	"gobot.io/x/gobot/platforms/raspi"
 	"math"
 	"time"
 )
@@ -272,26 +270,26 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	}
 }
 
-func main() {
-
-	raspiAdaptor := raspi.NewAdaptor()
-	gopigo3 := g.NewDriver(raspiAdaptor)
-
-	lidarSensor := i2c.NewLIDARLiteDriver(raspiAdaptor)
-
-	mainRobotFunc := func() {
-		robotRunLoop(gopigo3, lidarSensor)
-	}
-
-	robot := gobot.NewRobot("Project 2",
-		[]gobot.Connection{raspiAdaptor},
-		[]gobot.Device{gopigo3, lidarSensor},
-		mainRobotFunc,
-	)
-
-	err := robot.Start()
-
-	if err != nil {
-		fmt.Errorf("Error starting the Robot %+v", err)
-	}
-}
+//func main() {
+//
+//	raspiAdaptor := raspi.NewAdaptor()
+//	gopigo3 := g.NewDriver(raspiAdaptor)
+//
+//	lidarSensor := i2c.NewLIDARLiteDriver(raspiAdaptor)
+//
+//	mainRobotFunc := func() {
+//		robotRunLoop(gopigo3, lidarSensor)
+//	}
+//
+//	robot := gobot.NewRobot("Project 2",
+//		[]gobot.Connection{raspiAdaptor},
+//		[]gobot.Device{gopigo3, lidarSensor},
+//		mainRobotFunc,
+//	)
+//
+//	err := robot.Start()
+//
+//	if err != nil {
+//		fmt.Errorf("Error starting the Robot %+v", err)
+//	}
+//}
