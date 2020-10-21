@@ -272,6 +272,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if pidEnabled {
 				// TODO: Do something here
 			}
+			fmt.Printf("DEBUG!!!!!")
 			fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
 			Forward(gopigo3, -SPEED)
 			time.Sleep(time.Second)
