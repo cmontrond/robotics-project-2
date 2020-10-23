@@ -350,12 +350,19 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 					time.Sleep(time.Millisecond * 500)
 					Forward(gopigo3, -SPEED)
 					time.Sleep(time.Second)
+					Left(gopigo3, -SPEED)
+					time.Sleep(time.Millisecond * 200)
+					Forward(gopigo3, -SPEED)
+					time.Sleep(time.Second)
 
 				} else if pidOutput < 20 {
 					Left(gopigo3, -SPEED)
 					time.Sleep(time.Millisecond * 500)
 					Forward(gopigo3, -SPEED)
 					time.Sleep(time.Second)
+					Right(gopigo3, -SPEED)
+					time.Sleep(time.Millisecond * 200)
+					Forward(gopigo3, -SPEED)
 				} else {
 					Forward(gopigo3, -SPEED)
 					time.Sleep(time.Second)
