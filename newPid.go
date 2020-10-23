@@ -74,7 +74,7 @@ func (pid *PID) Compute(setPoint, input float64) float64 {
 			output = pid.minOutput
 		}
 	}
-	pid.lastInput = input
+	pid.lastInput = 0.0
 	return output
 }
 
