@@ -43,13 +43,13 @@ cd robotics-project-2
 Compile the source code:
 
 ```
-go build secondProject.go
+go build .
 ```
 
 Run the project:
 
 ```
-./secondProject
+./robotics-project-2
 ```
 
 ## Built With
