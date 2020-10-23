@@ -12,8 +12,6 @@ import (
 
 const (
 	SPEED       = 40
-	TOO_CLOSE   = 30
-	TOO_FAR     = 90
 	SENSOR_SIZE = 4 // We use to discard extra cm in our final length calculation
 )
 
@@ -108,63 +106,12 @@ func Stop(gopigo3 *g.Driver) {
 	}
 }
 
-func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
-	// We know that when it's under 105, it's close enough
-	// You will need to use the wheel size to get
-
-	// Proportional-Integral-Derivative (PID) controller
-	//pid := Pid {
-	//	Kp:            2.0,
-	//	Ki:            0.0,
-	//	Kd:            1.0,
-	//	Derivator:     0,
-	//	Integrator:    0,
-	//	IntegratorMax: 500,
-	//	IntegratorMin: 500,
-	//	SetPoint: 60,
-	//}
-
-	// width: 31cm // 39cm
-	// length: 41cm // 57cm
-
-	// third box: 43.5 / 40
+func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 	pid := NewPID(1, 1.0, 1.0, 0.0)
 	err := pid.SetTunings(1.0, 1.0, 0.0)
 	err = pid.SetOutputLimits(-1000.0, 1000.0)
 	err = pid.SetSampleTime(1) // sample time in seconds
-
-	//err = lidarSensor.Start()
-	//if err != nil {
-	//	fmt.Println("error starting lidarSensor")
-	//}
-	//
-	//for {
-	//	lidarReading, err := lidarSensor.Distance()
-	//
-	//	if err != nil {
-	//		fmt.Println("Error reading lidar sensor %+v", err)
-	//	}
-	//
-	//	pidOutput := pid.Compute(20.0, float64(lidarReading))
-	//	fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
-	//
-	//	if pidOutput >= 30 {
-	//		Right(gopigo3, -SPEED)
-	//		time.Sleep(time.Millisecond * 500)
-	//		Forward(gopigo3, -SPEED)
-	//		time.Sleep(time.Second)
-	//
-	//	} else if pidOutput < 20 {
-	//		Left(gopigo3, -SPEED)
-	//		time.Sleep(time.Millisecond * 500)
-	//		Forward(gopigo3, -SPEED)
-	//		time.Sleep(time.Second)
-	//	} else {
-	//		Forward(gopigo3, -SPEED)
-	//		time.Sleep(time.Second)
-	//	}
-	//}
 
 	firstSideStart := false
 	firstSideFinished := false
@@ -188,11 +135,8 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	thirdSideLength := 0.0
 	fourthSideLength := 0.0
 
-	// TODO: maybe have a turning boolean just so you don't do pid when turning. Maight not be necessary since you're doing turning in one bloc
-
 	pidEnabled := false
 	pidOutput := 0.0
-	//debug := false
 
 	err = lidarSensor.Start()
 	if err != nil {
@@ -200,8 +144,6 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	}
 
 	encodersVal := ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-
-	//println("Initial Encoders Value (in cm): ", encodersVal)
 
 	for {
 
@@ -251,7 +193,6 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				secondSideStart = true
 				pid.Reset()
 				pidOutput = 0.0
-				//debug = true
 				println("SECOND SIDE: STARTED")
 				pidEnabled = true
 				Stop(gopigo3)
@@ -337,12 +278,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				fourthSideLength = math.Abs(encodersVal - fourthSideStartEncodersVal)
 			}
 
-			//encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-			//fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
-
-			// Here, should actually decide if you move a little bit to the left, right, or continue forward
 			if pidEnabled {
-				// This is where PID logic should go?
 				pidOutput = pid.Compute(20.0, float64(lidarReading))
 				fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
 				if pidOutput >= 33 {
@@ -386,22 +322,6 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			println("====================================\n\n")
 		}
 	}
-}
-
-func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
-	workingCode(gopigo3, lidarSensor)
-
-	//for {
-	//	lidarReading, err := lidarSensor.Distance()
-	//
-	//	if err != nil {
-	//		fmt.Println("Error reading lidar sensor %+v", err)
-	//	}
-	//
-	//	println("Lidar Sensor Value:", lidarReading)
-	//
-	//	time.Sleep(time.Second)
-	//}
 }
 
 func main() {
