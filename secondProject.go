@@ -165,6 +165,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// FIRST SIDE
 			if lidarReading < 105 && !firstSideStart {
 				firstSideStart = true
+				println("FIRST SIDE: STARTED")
 				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
@@ -193,6 +194,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// SECOND SIDE
 			if lidarReading < 105 && firstSideFinished && firstTurnFinished && !secondSideStart {
 				secondSideStart = true
+				println("SECOND SIDE: STARTED")
 				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
@@ -221,6 +223,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// THIRD SIDE
 			if lidarReading < 105 && secondSideFinished && secondTurnFinished && !thirdSideStart {
 				thirdSideStart = true
+				println("THIRD SIDE: STARTED")
 				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
@@ -249,6 +252,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// FOURTH SIDE
 			if lidarReading < 105 && thirdSideFinished && thirdTurnFinished && !fourthSideStart {
 				fourthSideStart = true
+				println("FOURTH SIDE: STARTED")
 				pidEnabled = true
 				Stop(gopigo3)
 				time.Sleep(time.Second)
