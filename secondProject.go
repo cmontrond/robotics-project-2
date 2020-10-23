@@ -178,7 +178,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				fmt.Printf("FIRST SIDE FINISHED")
+				println("FIRST SIDE FINISHED")
 				firstSideLength = math.Abs(encodersVal - firstSideStartEncodersVal)
 			}
 
@@ -211,7 +211,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				fmt.Printf("SECOND SIDE FINISHED")
+				println("SECOND SIDE FINISHED")
 				secondSideLength = math.Abs(encodersVal - secondSideStartEncodersVal)
 			}
 
@@ -243,7 +243,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				fmt.Printf("THIRD SIDE FINISHED")
+				println("THIRD SIDE FINISHED")
 				thirdSideLength = math.Abs(encodersVal - thirdSideStartEncodersVal)
 			}
 
@@ -279,7 +279,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Stop(gopigo3)
 				time.Sleep(time.Second)
 				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-				fmt.Printf("FOURTH SIDE FINISHED")
+				println("FOURTH SIDE FINISHED")
 				fourthSideLength = math.Abs(encodersVal - fourthSideStartEncodersVal)
 			}
 
