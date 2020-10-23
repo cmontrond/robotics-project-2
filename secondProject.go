@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	SPEED       = 80
+	SPEED       = 40
 	TOO_CLOSE   = 30
 	TOO_FAR     = 90
 	SENSOR_SIZE = 4 // We use to discard extra cm in our final length calculation
@@ -241,7 +241,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
-				time.Sleep(time.Millisecond * 2200)
+				time.Sleep(time.Millisecond * 110)
 				firstTurnFinished = true
 				println("Finished First Turn")
 			}
@@ -274,7 +274,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
-				time.Sleep(time.Millisecond * 2200)
+				time.Sleep(time.Millisecond * 1100)
 				secondTurnFinished = true
 				println("Finished Second Turn")
 			}
@@ -306,7 +306,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
-				time.Sleep(time.Millisecond * 2200)
+				time.Sleep(time.Millisecond * 1100)
 				thirdTurnFinished = true
 				println("Finished Third Turn")
 			}
