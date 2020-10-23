@@ -78,6 +78,10 @@ func (pid *PID) Compute(setPoint, input float64) float64 {
 	return output
 }
 
+func (pid *PID) ResetLastInput() {
+	pid.lastInput = 0
+}
+
 //func main() {
 //	inputs := []float64{34.0, 100.0, 600.0, 20.0, 90.0, 60.0}
 //	setPoint := 60.0
