@@ -241,7 +241,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
-				time.Sleep(time.Millisecond * 110)
+				time.Sleep(time.Millisecond * 4400)
 				firstTurnFinished = true
 				println("Finished First Turn")
 			}
@@ -274,7 +274,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
-				time.Sleep(time.Millisecond * 1100)
+				time.Sleep(time.Millisecond * 4400)
 				secondTurnFinished = true
 				println("Finished Second Turn")
 			}
@@ -306,7 +306,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				Forward(gopigo3, -SPEED)
 				time.Sleep(time.Second * 2)
 				SpinRight(gopigo3, SPEED)
-				time.Sleep(time.Millisecond * 1100)
+				time.Sleep(time.Millisecond * 4400)
 				thirdTurnFinished = true
 				println("Finished Third Turn")
 			}
