@@ -125,6 +125,8 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 		pidOutput := pid.Compute(20.0, float64(lidarReading))
 		fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
+
+		time.Sleep(time.Second)
 	}
 
 	//firstSideStart := false
