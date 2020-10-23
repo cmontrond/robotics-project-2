@@ -6,6 +6,7 @@ import (
 	"gobot.io/x/gobot/drivers/i2c"
 	g "gobot.io/x/gobot/platforms/dexter/gopigo3"
 	"gobot.io/x/gobot/platforms/raspi"
+	"math"
 	"time"
 )
 
@@ -133,234 +134,250 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 	err = pid.SetOutputLimits(-1000.0, 1000.0)
 	err = pid.SetSampleTime(1) // sample time in seconds
 
-	err = lidarSensor.Start()
-	if err != nil {
-		fmt.Println("error starting lidarSensor")
-	}
-
-	for {
-		lidarReading, err := lidarSensor.Distance()
-
-		if err != nil {
-			fmt.Println("Error reading lidar sensor %+v", err)
-		}
-
-		pidOutput := pid.Compute(20.0, float64(lidarReading))
-		fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
-
-		if pidOutput >= 30 {
-			Right(gopigo3, -SPEED)
-			time.Sleep(time.Millisecond * 500)
-			Forward(gopigo3, -SPEED)
-			time.Sleep(time.Second)
-
-		} else if pidOutput < 20 {
-			Left(gopigo3, -SPEED)
-			time.Sleep(time.Millisecond * 500)
-			Forward(gopigo3, -SPEED)
-			time.Sleep(time.Second)
-		} else {
-			Forward(gopigo3, -SPEED)
-			time.Sleep(time.Second)
-		}
-	}
-
-	//firstSideStart := false
-	//firstSideFinished := false
-	//firstTurnFinished := false
-	//secondSideStart := false
-	//secondSideFinished := false
-	//secondTurnFinished := false
-	//thirdSideStart := false
-	//thirdSideFinished := false
-	//thirdTurnFinished := false
-	//fourthSideStart := false
-	//fourthSideFinished := false
-	//
-	//firstSideStartEncodersVal := 0.0
-	//secondSideStartEncodersVal := 0.0
-	//thirdSideStartEncodersVal := 0.0
-	//fourthSideStartEncodersVal := 0.0
-	//
-	//firstSideLength := 0.0
-	//secondSideLength := 0.0
-	//thirdSideLength := 0.0
-	//fourthSideLength := 0.0
-	//
-	//// TODO: maybe have a turning boolean just so you don't do pid when turning. Maight not be necessary since you're doing turning in one bloc
-	//
-	//pidEnabled := false
-	//pidOutput := 0.0
-	////debug := false
-	//
 	//err = lidarSensor.Start()
 	//if err != nil {
 	//	fmt.Println("error starting lidarSensor")
 	//}
 	//
-	//encodersVal := ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//
-	////println("Initial Encoders Value (in cm): ", encodersVal)
-	//
 	//for {
+	//	lidarReading, err := lidarSensor.Distance()
 	//
-	//	if !fourthSideFinished {
-	//		lidarReading, err := lidarSensor.Distance()
+	//	if err != nil {
+	//		fmt.Println("Error reading lidar sensor %+v", err)
+	//	}
 	//
-	//		if err != nil {
-	//			fmt.Println("Error reading lidar sensor %+v", err)
-	//		}
+	//	pidOutput := pid.Compute(20.0, float64(lidarReading))
+	//	fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
 	//
-	//		println("Lidar Sensor Value:", lidarReading)
-	//
-	//		// FIRST SIDE
-	//		if lidarReading < 105 && !firstSideStart {
-	//			firstSideStart = true
-	//			println("FIRST SIDE: STARTED")
-	//			pidEnabled = true
-	//			pid.Reset()
-	//			pidOutput = 0.0
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			firstSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//		}
-	//
-	//		if lidarReading > 105 && firstSideStart && !firstSideFinished {
-	//			firstSideFinished = true
-	//			pidEnabled = false
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//			println("FIRST SIDE FINISHED")
-	//			firstSideLength = math.Abs(encodersVal - firstSideStartEncodersVal)
-	//		}
-	//
-	//		if lidarReading > 100 && firstSideFinished && !firstTurnFinished {
-	//			pidEnabled = false
-	//			Forward(gopigo3, -SPEED)
-	//			time.Sleep(time.Second * 2)
-	//			SpinRight(gopigo3, SPEED)
-	//			time.Sleep(time.Millisecond * 2200)
-	//			firstTurnFinished = true
-	//			println("Finished First Turn")
-	//		}
-	//
-	//		// SECOND SIDE
-	//		if lidarReading < 105 && firstSideFinished && firstTurnFinished && !secondSideStart {
-	//			secondSideStart = true
-	//			pid.Reset()
-	//			pidOutput = 0.0
-	//			//debug = true
-	//			println("SECOND SIDE: STARTED")
-	//			pidEnabled = true
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			secondSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//		}
-	//
-	//		if lidarReading > 105 && secondSideStart && !secondSideFinished {
-	//			secondSideFinished = true
-	//			pidEnabled = false
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//			println("SECOND SIDE FINISHED")
-	//			secondSideLength = math.Abs(encodersVal - secondSideStartEncodersVal)
-	//		}
-	//
-	//		if lidarReading > 100 && secondSideFinished && !secondTurnFinished {
-	//			pidEnabled = false
-	//			Forward(gopigo3, -SPEED)
-	//			time.Sleep(time.Second * 2)
-	//			SpinRight(gopigo3, SPEED)
-	//			time.Sleep(time.Millisecond * 2200)
-	//			secondTurnFinished = true
-	//			println("Finished Second Turn")
-	//		}
-	//
-	//		// THIRD SIDE
-	//		if lidarReading < 105 && secondSideFinished && secondTurnFinished && !thirdSideStart {
-	//			thirdSideStart = true
-	//			println("THIRD SIDE: STARTED")
-	//			pidEnabled = true
-	//			pid.Reset()
-	//			pidOutput = 0.0
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			thirdSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//		}
-	//
-	//		if lidarReading > 105 && thirdSideStart && !thirdSideFinished {
-	//			thirdSideFinished = true
-	//			pidEnabled = false
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//			println("THIRD SIDE FINISHED")
-	//			thirdSideLength = math.Abs(encodersVal - thirdSideStartEncodersVal)
-	//		}
-	//
-	//		if lidarReading > 100 && thirdSideFinished && !thirdTurnFinished {
-	//			pidEnabled = false
-	//			Forward(gopigo3, -SPEED)
-	//			time.Sleep(time.Second * 2)
-	//			SpinRight(gopigo3, SPEED)
-	//			time.Sleep(time.Millisecond * 2200)
-	//			thirdTurnFinished = true
-	//			println("Finished Third Turn")
-	//		}
-	//
-	//		// FOURTH SIDE
-	//		if lidarReading < 105 && thirdSideFinished && thirdTurnFinished && !fourthSideStart {
-	//			fourthSideStart = true
-	//			pidEnabled = false
-	//			pid.Reset()
-	//			pidOutput = 0.0
-	//			println("FOURTH SIDE: STARTED")
-	//			pidEnabled = true
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			fourthSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//		}
-	//
-	//		if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
-	//			pidEnabled = false
-	//			pid.Reset()
-	//			pidOutput = 0.0
-	//			fourthSideFinished = true
-	//			println("Finished")
-	//			Stop(gopigo3)
-	//			time.Sleep(time.Second)
-	//			encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//			println("FOURTH SIDE FINISHED")
-	//			fourthSideLength = math.Abs(encodersVal - fourthSideStartEncodersVal)
-	//		}
-	//
-	//		//encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
-	//		//fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
-	//
-	//		// Here, should actually decide if you move a little bit to the left, right, or continue forward
-	//		if pidEnabled {
-	//			// This is where PID logic should go?
-	//			pidOutput = pid.Compute(20.0, float64(lidarReading))
-	//			fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
-	//		}
+	//	if pidOutput >= 30 {
+	//		Right(gopigo3, -SPEED)
+	//		time.Sleep(time.Millisecond * 500)
 	//		Forward(gopigo3, -SPEED)
 	//		time.Sleep(time.Second)
 	//
+	//	} else if pidOutput < 20 {
+	//		Left(gopigo3, -SPEED)
+	//		time.Sleep(time.Millisecond * 500)
+	//		Forward(gopigo3, -SPEED)
+	//		time.Sleep(time.Second)
 	//	} else {
-	//		Stop(gopigo3)
-	//		BlinkLED(gopigo3)
-	//		println("====================================\n\n")
-	//		fmt.Printf("First side length: %.2f cm\n", firstSideLength-SENSOR_SIZE)
-	//		fmt.Printf("Second side length: %.2f cm\n", secondSideLength-SENSOR_SIZE)
-	//		fmt.Printf("Third side length: %.2f cm\n", thirdSideLength-SENSOR_SIZE)
-	//		fmt.Printf("Fourth side length: %.2f cm\n\n", fourthSideLength-SENSOR_SIZE)
-	//		fmt.Printf("Difference between first and third sides: %.2f cm\n", math.Abs(firstSideLength-thirdSideLength))
-	//		fmt.Printf("Difference between second and fourth sides: %.2f cm\n\n", math.Abs(secondSideLength-fourthSideLength))
-	//		println("====================================\n\n")
+	//		Forward(gopigo3, -SPEED)
+	//		time.Sleep(time.Second)
 	//	}
 	//}
+
+	firstSideStart := false
+	firstSideFinished := false
+	firstTurnFinished := false
+	secondSideStart := false
+	secondSideFinished := false
+	secondTurnFinished := false
+	thirdSideStart := false
+	thirdSideFinished := false
+	thirdTurnFinished := false
+	fourthSideStart := false
+	fourthSideFinished := false
+
+	firstSideStartEncodersVal := 0.0
+	secondSideStartEncodersVal := 0.0
+	thirdSideStartEncodersVal := 0.0
+	fourthSideStartEncodersVal := 0.0
+
+	firstSideLength := 0.0
+	secondSideLength := 0.0
+	thirdSideLength := 0.0
+	fourthSideLength := 0.0
+
+	// TODO: maybe have a turning boolean just so you don't do pid when turning. Maight not be necessary since you're doing turning in one bloc
+
+	pidEnabled := false
+	pidOutput := 0.0
+	//debug := false
+
+	err = lidarSensor.Start()
+	if err != nil {
+		fmt.Println("error starting lidarSensor")
+	}
+
+	encodersVal := ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+
+	//println("Initial Encoders Value (in cm): ", encodersVal)
+
+	for {
+
+		if !fourthSideFinished {
+			lidarReading, err := lidarSensor.Distance()
+
+			if err != nil {
+				fmt.Println("Error reading lidar sensor %+v", err)
+			}
+
+			println("Lidar Sensor Value:", lidarReading)
+
+			// FIRST SIDE
+			if lidarReading < 105 && !firstSideStart {
+				firstSideStart = true
+				println("FIRST SIDE: STARTED")
+				pidEnabled = true
+				pid.Reset()
+				pidOutput = 0.0
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				firstSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+			}
+
+			if lidarReading > 105 && firstSideStart && !firstSideFinished {
+				firstSideFinished = true
+				pidEnabled = false
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("FIRST SIDE FINISHED")
+				firstSideLength = math.Abs(encodersVal - firstSideStartEncodersVal)
+			}
+
+			if lidarReading > 100 && firstSideFinished && !firstTurnFinished {
+				pidEnabled = false
+				Forward(gopigo3, -SPEED)
+				time.Sleep(time.Second * 2)
+				SpinRight(gopigo3, SPEED)
+				time.Sleep(time.Millisecond * 2200)
+				firstTurnFinished = true
+				println("Finished First Turn")
+			}
+
+			// SECOND SIDE
+			if lidarReading < 105 && firstSideFinished && firstTurnFinished && !secondSideStart {
+				secondSideStart = true
+				pid.Reset()
+				pidOutput = 0.0
+				//debug = true
+				println("SECOND SIDE: STARTED")
+				pidEnabled = true
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				secondSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+			}
+
+			if lidarReading > 105 && secondSideStart && !secondSideFinished {
+				secondSideFinished = true
+				pidEnabled = false
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("SECOND SIDE FINISHED")
+				secondSideLength = math.Abs(encodersVal - secondSideStartEncodersVal)
+			}
+
+			if lidarReading > 100 && secondSideFinished && !secondTurnFinished {
+				pidEnabled = false
+				Forward(gopigo3, -SPEED)
+				time.Sleep(time.Second * 2)
+				SpinRight(gopigo3, SPEED)
+				time.Sleep(time.Millisecond * 2200)
+				secondTurnFinished = true
+				println("Finished Second Turn")
+			}
+
+			// THIRD SIDE
+			if lidarReading < 105 && secondSideFinished && secondTurnFinished && !thirdSideStart {
+				thirdSideStart = true
+				println("THIRD SIDE: STARTED")
+				pidEnabled = true
+				pid.Reset()
+				pidOutput = 0.0
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				thirdSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+			}
+
+			if lidarReading > 105 && thirdSideStart && !thirdSideFinished {
+				thirdSideFinished = true
+				pidEnabled = false
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("THIRD SIDE FINISHED")
+				thirdSideLength = math.Abs(encodersVal - thirdSideStartEncodersVal)
+			}
+
+			if lidarReading > 100 && thirdSideFinished && !thirdTurnFinished {
+				pidEnabled = false
+				Forward(gopigo3, -SPEED)
+				time.Sleep(time.Second * 2)
+				SpinRight(gopigo3, SPEED)
+				time.Sleep(time.Millisecond * 2200)
+				thirdTurnFinished = true
+				println("Finished Third Turn")
+			}
+
+			// FOURTH SIDE
+			if lidarReading < 105 && thirdSideFinished && thirdTurnFinished && !fourthSideStart {
+				fourthSideStart = true
+				pidEnabled = false
+				pid.Reset()
+				pidOutput = 0.0
+				println("FOURTH SIDE: STARTED")
+				pidEnabled = true
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				fourthSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+			}
+
+			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
+				pidEnabled = false
+				pid.Reset()
+				pidOutput = 0.0
+				fourthSideFinished = true
+				println("Finished")
+				Stop(gopigo3)
+				time.Sleep(time.Second)
+				encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+				println("FOURTH SIDE FINISHED")
+				fourthSideLength = math.Abs(encodersVal - fourthSideStartEncodersVal)
+			}
+
+			//encodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
+			//fmt.Printf("Current Encoders Value (in cm): %.2f\n", encodersVal)
+
+			// Here, should actually decide if you move a little bit to the left, right, or continue forward
+			if pidEnabled {
+				// This is where PID logic should go?
+				pidOutput = pid.Compute(20.0, float64(lidarReading))
+				fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
+				if pidOutput >= 30 {
+					Right(gopigo3, -SPEED)
+					time.Sleep(time.Millisecond * 500)
+					Forward(gopigo3, -SPEED)
+					time.Sleep(time.Second)
+
+				} else if pidOutput < 20 {
+					Left(gopigo3, -SPEED)
+					time.Sleep(time.Millisecond * 500)
+					Forward(gopigo3, -SPEED)
+					time.Sleep(time.Second)
+				} else {
+					Forward(gopigo3, -SPEED)
+					time.Sleep(time.Second)
+				}
+			} else {
+				Forward(gopigo3, -SPEED)
+				time.Sleep(time.Second)
+			}
+
+		} else {
+			Stop(gopigo3)
+			BlinkLED(gopigo3)
+			println("====================================\n\n")
+			fmt.Printf("First side length: %.2f cm\n", firstSideLength-SENSOR_SIZE)
+			fmt.Printf("Second side length: %.2f cm\n", secondSideLength-SENSOR_SIZE)
+			fmt.Printf("Third side length: %.2f cm\n", thirdSideLength-SENSOR_SIZE)
+			fmt.Printf("Fourth side length: %.2f cm\n\n", fourthSideLength-SENSOR_SIZE)
+			fmt.Printf("Difference between first and third sides: %.2f cm\n", math.Abs(firstSideLength-thirdSideLength))
+			fmt.Printf("Difference between second and fourth sides: %.2f cm\n\n", math.Abs(secondSideLength-fourthSideLength))
+			println("====================================\n\n")
+		}
+	}
 }
 
 func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
