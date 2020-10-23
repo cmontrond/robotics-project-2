@@ -78,7 +78,8 @@ func (pid *PID) Compute(setPoint, input float64) float64 {
 	return output
 }
 
-func (pid *PID) ResetLastInput() {
+func (pid *PID) Reset() {
+	pid.iTerm = 0.0
 	pid.lastInput = 0
 }
 

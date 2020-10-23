@@ -160,23 +160,12 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			println("Lidar Sensor Value:", lidarReading)
 
-			// This is where PID logic should go?
-			if pidEnabled {
-				pidOutput = pid.Compute(20.0, float64(lidarReading))
-				//if debug && (pidOutput <= -100.0 || lidarReading >= 100.0) {
-				//	Stop(gopigo3)
-				//	println("Lidar: Reading", lidarReading)
-				//	fmt.Printf("Last Input: %.2f\n", pid.lastInput)
-				//	time.Sleep(time.Second * 20)
-				//}
-			}
-
 			// FIRST SIDE
 			if lidarReading < 105 && !firstSideStart {
 				firstSideStart = true
 				println("FIRST SIDE: STARTED")
 				pidEnabled = true
-				pid.ResetLastInput()
+				pid.Reset()
 				pidOutput = 0.0
 				Stop(gopigo3)
 				time.Sleep(time.Second)
@@ -206,7 +195,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			// SECOND SIDE
 			if lidarReading < 105 && firstSideFinished && firstTurnFinished && !secondSideStart {
 				secondSideStart = true
-				pid.ResetLastInput()
+				pid.Reset()
 				pidOutput = 0.0
 				//debug = true
 				println("SECOND SIDE: STARTED")
@@ -241,7 +230,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				thirdSideStart = true
 				println("THIRD SIDE: STARTED")
 				pidEnabled = true
-				pid.ResetLastInput()
+				pid.Reset()
 				pidOutput = 0.0
 				Stop(gopigo3)
 				time.Sleep(time.Second)
@@ -272,7 +261,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if lidarReading < 105 && thirdSideFinished && thirdTurnFinished && !fourthSideStart {
 				fourthSideStart = true
 				pidEnabled = false
-				pid.ResetLastInput()
+				pid.Reset()
 				pidOutput = 0.0
 				println("FOURTH SIDE: STARTED")
 				pidEnabled = true
@@ -283,7 +272,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
 				pidEnabled = false
-				pid.ResetLastInput()
+				pid.Reset()
 				pidOutput = 0.0
 				fourthSideFinished = true
 				println("Finished")
@@ -299,6 +288,8 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			// Here, should actually decide if you move a little bit to the left, right, or continue forward
 			if pidEnabled {
+				// This is where PID logic should go?
+				pidOutput = pid.Compute(20.0, float64(lidarReading))
 				fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
 			}
 			Forward(gopigo3, -SPEED)
