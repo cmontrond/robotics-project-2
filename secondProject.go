@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	SPEED       = 80
+	SPEED       = 40
 	TOO_CLOSE   = 30
 	TOO_FAR     = 90
 	SENSOR_SIZE = 4 // We use to discard extra cm in our final length calculation
@@ -20,6 +20,28 @@ func Forward(gopigo3 *g.Driver, speed int) {
 	err := gopigo3.SetMotorDps(g.MOTOR_LEFT+g.MOTOR_RIGHT, speed)
 	if err != nil {
 		fmt.Errorf("Error moving the robot forward: %+v", err)
+	}
+}
+
+func Left(gopigo3 *g.Driver, speed int) {
+	err := gopigo3.SetMotorDps(g.MOTOR_LEFT, 0)
+	if err != nil {
+		fmt.Errorf("Error moving the robot backward: %+v", err)
+	}
+	err = gopigo3.SetMotorDps(g.MOTOR_RIGHT, speed)
+	if err != nil {
+		fmt.Errorf("Error moving the robot backward: %+v", err)
+	}
+}
+
+func Right(gopigo3 *g.Driver, speed int) {
+	err := gopigo3.SetMotorDps(g.MOTOR_LEFT, speed)
+	if err != nil {
+		fmt.Errorf("Error moving the robot backward: %+v", err)
+	}
+	err = gopigo3.SetMotorDps(g.MOTOR_RIGHT, 0)
+	if err != nil {
+		fmt.Errorf("Error moving the robot backward: %+v", err)
 	}
 }
 
@@ -125,6 +147,15 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 		pidOutput := pid.Compute(20.0, float64(lidarReading))
 		fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
+
+		if pidOutput >= 30 {
+			Left(gopigo3, -SPEED)
+
+		} else if pidOutput < 20 {
+			Right(gopigo3, -SPEED)
+		} else {
+			Forward(gopigo3, -SPEED)
+		}
 
 		time.Sleep(time.Second)
 	}
