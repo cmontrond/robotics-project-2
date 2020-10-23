@@ -351,7 +351,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 					Forward(gopigo3, -SPEED)
 					time.Sleep(time.Second)
 					Left(gopigo3, -SPEED)
-					time.Sleep(time.Millisecond * 200)
+					time.Sleep(time.Millisecond * 500)
 					Forward(gopigo3, -SPEED)
 					time.Sleep(time.Second)
 
@@ -361,7 +361,7 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 					Forward(gopigo3, -SPEED)
 					time.Sleep(time.Second)
 					Right(gopigo3, -SPEED)
-					time.Sleep(time.Millisecond * 200)
+					time.Sleep(time.Millisecond * 500)
 					Forward(gopigo3, -SPEED)
 				} else {
 					Forward(gopigo3, -SPEED)
