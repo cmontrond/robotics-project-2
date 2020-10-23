@@ -57,7 +57,7 @@ func (pid *PID) SetSampleTime(seconds int) error {
 
 func (pid *PID) Compute(setPoint, input float64) float64 {
 	err := setPoint - input
-	pid.iTerm += pid.ki * err
+	pid.iTerm = pid.ki * err
 	if pid.limitsActive {
 		if pid.iTerm > pid.maxOutput {
 			pid.iTerm = pid.maxOutput
