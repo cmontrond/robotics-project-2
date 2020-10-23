@@ -161,11 +161,13 @@ func workingCode(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 
 			// This is where PID logic should go?
 			if pidEnabled {
-				if lidarReading > 50 {
+				pidOutput = pid.Compute(20.0, float64(lidarReading))
+				if pidOutput <= -100.0 || lidarReading >= 100.0 {
 					Stop(gopigo3)
+					println("Lidar: Reading", lidarReading)
+					fmt.Printf("Last Input: %.2f\n", pid.lastInput)
 					time.Sleep(time.Second * 20)
 				}
-				pidOutput = pid.Compute(20.0, float64(lidarReading))
 			}
 
 			// FIRST SIDE
