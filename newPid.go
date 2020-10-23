@@ -5,9 +5,9 @@ import (
 )
 
 type PID struct {
-	iTerm, lastErr, minOutput, maxOutput, kp, ki, kd float64
-	sampleTime                                       int
-	limitsActive                                     bool
+	iTerm, lastInput, minOutput, maxOutput, kp, ki, kd float64
+	sampleTime                                         int
+	limitsActive                                       bool
 }
 
 func NewPID(interval int, kp, ki, kd float64) *PID {
@@ -65,7 +65,7 @@ func (pid *PID) Compute(setPoint, input float64) float64 {
 			pid.iTerm = pid.minOutput
 		}
 	}
-	dInput := input - pid.lastErr
+	dInput := input - pid.lastInput
 	output := pid.kp*err + pid.ki*pid.iTerm + pid.kd*dInput
 	if pid.limitsActive {
 		if output > pid.maxOutput {
@@ -74,7 +74,7 @@ func (pid *PID) Compute(setPoint, input float64) float64 {
 			output = pid.minOutput
 		}
 	}
-	pid.lastErr = err
+	pid.lastInput = input
 	return output
 }
 
@@ -92,7 +92,7 @@ func (pid *PID) Compute(setPoint, input float64) float64 {
 //		println("Index: ", i)
 //		fmt.Printf("SetPoint: %.2f\n", setPoint)
 //		fmt.Printf("Input: %.2f\n", value)
-//		fmt.Printf("LastInput: %.2f\n", pid.lastErr)
+//		fmt.Printf("LastInput: %.2f\n", pid.lastInput)
 //		fmt.Printf("Output: %.2f\n", pid.Compute(setPoint, value))
 //		fmt.Printf("\n\n")
 //	}
