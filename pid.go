@@ -82,23 +82,3 @@ func (pid *PID) Reset() {
 	pid.iTerm = 0.0
 	pid.lastInput = 0
 }
-
-//func main() {
-//	inputs := []float64{34.0, 100.0, 600.0, 20.0, 90.0, 60.0}
-//	setPoint := 60.0
-//	pid := NewPID(1, 1.0, 1.0, 0.0)
-//	err := pid.SetSampleTime(1)
-//
-//	if err != nil {
-//		println("Error")
-//	}
-//
-//	for i, value := range inputs {
-//		println("Index: ", i)
-//		fmt.Printf("SetPoint: %.2f\n", setPoint)
-//		fmt.Printf("Input: %.2f\n", value)
-//		fmt.Printf("LastInput: %.2f\n", pid.lastInput)
-//		fmt.Printf("Output: %.2f\n", pid.Compute(setPoint, value))
-//		fmt.Printf("\n\n")
-//	}
-//}
