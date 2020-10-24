@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d8b7798-dcac-4c64-9629-e70a0c392360" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gobotLib.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/secondProject.go" beforeDir="false" afterPath="$PROJECT_DIR$/secondProject.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,13 +65,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1602085665209</updated>
-    </task>
-    <task id="LOCAL-00060" summary="testing values with the actual robot">
-      <created>1603300274347</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1603300274348</updated>
     </task>
     <task id="LOCAL-00061" summary="testing values with the actual robot">
       <created>1603300409586</created>
@@ -407,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603494314051</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="updated readme">
+      <created>1603494756325</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1603494756325</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,18 +440,19 @@
     <MESSAGE value="testing values with the actual robot" />
     <MESSAGE value="clean code" />
     <MESSAGE value="removed unused code" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed unused code" />
+    <MESSAGE value="updated readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated readme" />
   </component>
   <component name="WindowStateProjectService">
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1602802761443">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602802761443" />
-    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1603494313203">
+    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1603494755654">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197702040" />
-    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1603494313203" />
+    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1603494755654" />
     <state x="626" y="310" key="Github.ShareDialog" timestamp="1602086518174">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -478,11 +481,11 @@
     </state>
     <state width="1493" height="444" key="GridCell.Tab.0.right/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1603242542218" />
     <state width="1493" height="444" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603297472954" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603494315761">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603494758121">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1602197704238" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603494315761" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603494758121" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603231366268">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
