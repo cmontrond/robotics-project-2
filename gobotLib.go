@@ -16,33 +16,33 @@ func Forward(gopigo3 *g.Driver, speed int) {
 func Left(gopigo3 *g.Driver, speed int) {
 	err := gopigo3.SetMotorDps(g.MOTOR_LEFT, 0)
 	if err != nil {
-		fmt.Errorf("Error moving the robot backward: %+v", err)
+		fmt.Errorf("Error moving the robot left: %+v", err)
 	}
 	err = gopigo3.SetMotorDps(g.MOTOR_RIGHT, speed)
 	if err != nil {
-		fmt.Errorf("Error moving the robot backward: %+v", err)
+		fmt.Errorf("Error moving the robot left: %+v", err)
 	}
 }
 
 func Right(gopigo3 *g.Driver, speed int) {
 	err := gopigo3.SetMotorDps(g.MOTOR_LEFT, speed)
 	if err != nil {
-		fmt.Errorf("Error moving the robot backward: %+v", err)
+		fmt.Errorf("Error moving the robot right: %+v", err)
 	}
 	err = gopigo3.SetMotorDps(g.MOTOR_RIGHT, 0)
 	if err != nil {
-		fmt.Errorf("Error moving the robot backward: %+v", err)
+		fmt.Errorf("Error moving the robot right: %+v", err)
 	}
 }
 
 func SpinRight(gopigo3 *g.Driver, speed int) {
 	err := gopigo3.SetMotorDps(g.MOTOR_LEFT, speed)
 	if err != nil {
-		fmt.Errorf("Error moving the robot backward: %+v", err)
+		fmt.Errorf("Error doing spin right: %+v", err)
 	}
 	err = gopigo3.SetMotorDps(g.MOTOR_RIGHT, speed*-1)
 	if err != nil {
-		fmt.Errorf("Error moving the robot backward: %+v", err)
+		fmt.Errorf("Error doing spin right: %+v", err)
 	}
 }
 
