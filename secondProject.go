@@ -66,7 +66,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			println("Lidar Sensor Value:", lidarReading)
 
 			// FIRST SIDE
-			if lidarReading < 105 && !firstSideStart {
+			if lidarReading < 50 && !firstSideStart {
 				firstSideStart = true
 				println("FIRST SIDE: STARTED")
 				pidEnabled = true
@@ -77,7 +77,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				firstSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 			}
 
-			if lidarReading > 105 && firstSideStart && !firstSideFinished {
+			if lidarReading > 50 && firstSideStart && !firstSideFinished {
 				firstSideFinished = true
 				pidEnabled = false
 				Stop(gopigo3)
@@ -98,7 +98,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			}
 
 			// SECOND SIDE
-			if lidarReading < 105 && firstSideFinished && firstTurnFinished && !secondSideStart {
+			if lidarReading < 50 && firstSideFinished && firstTurnFinished && !secondSideStart {
 				secondSideStart = true
 				pid.Reset()
 				pidOutput = 0.0
@@ -109,7 +109,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				secondSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 			}
 
-			if lidarReading > 105 && secondSideStart && !secondSideFinished {
+			if lidarReading > 50 && secondSideStart && !secondSideFinished {
 				secondSideFinished = true
 				pidEnabled = false
 				Stop(gopigo3)
@@ -130,7 +130,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			}
 
 			// THIRD SIDE
-			if lidarReading < 105 && secondSideFinished && secondTurnFinished && !thirdSideStart {
+			if lidarReading < 50 && secondSideFinished && secondTurnFinished && !thirdSideStart {
 				thirdSideStart = true
 				println("THIRD SIDE: STARTED")
 				pidEnabled = true
@@ -141,7 +141,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				thirdSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 			}
 
-			if lidarReading > 105 && thirdSideStart && !thirdSideFinished {
+			if lidarReading > 50 && thirdSideStart && !thirdSideFinished {
 				thirdSideFinished = true
 				pidEnabled = false
 				Stop(gopigo3)
@@ -162,7 +162,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			}
 
 			// FOURTH SIDE
-			if lidarReading < 105 && thirdSideFinished && thirdTurnFinished && !fourthSideStart {
+			if lidarReading < 50 && thirdSideFinished && thirdTurnFinished && !fourthSideStart {
 				fourthSideStart = true
 				pidEnabled = false
 				pid.Reset()
@@ -174,7 +174,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 				fourthSideStartEncodersVal = ReadEncodersAverage(gopigo3, g.WHEEL_CIRCUMFERENCE)
 			}
 
-			if lidarReading > 105 && fourthSideStart && !fourthSideFinished {
+			if lidarReading > 50 && fourthSideStart && !fourthSideFinished {
 				pidEnabled = false
 				pid.Reset()
 				pidOutput = 0.0
