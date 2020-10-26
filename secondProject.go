@@ -190,7 +190,7 @@ func robotRunLoop(gopigo3 *g.Driver, lidarSensor *i2c.LIDARLiteDriver) {
 			if pidEnabled {
 				pidOutput = pid.Compute(20.0, float64(lidarReading))
 				fmt.Printf("PID OUTPUT: %.2f\n", pidOutput)
-				if pidOutput > 33 {
+				if pidOutput > 30 {
 					Right(gopigo3, -SPEED)
 					time.Sleep(time.Millisecond * 500)
 					Forward(gopigo3, -SPEED)

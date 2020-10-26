@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8d8b7798-dcac-4c64-9629-e70a0c392360" name="Default Changelist" comment="">
+    <list default="true" id="8d8b7798-dcac-4c64-9629-e70a0c392360" name="Default Changelist" comment="fixed typos in lib file">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/secondProject.go" beforeDir="false" afterPath="$PROJECT_DIR$/secondProject.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,27 +64,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1602085665209</updated>
-    </task>
-    <task id="LOCAL-00068" summary="testing values with the actual robot">
-      <created>1603480195621</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1603480195621</updated>
-    </task>
-    <task id="LOCAL-00069" summary="testing values with the actual robot">
-      <created>1603480255619</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1603480255619</updated>
-    </task>
-    <task id="LOCAL-00070" summary="testing values with the actual robot">
-      <created>1603480503806</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1603480503806</updated>
     </task>
     <task id="LOCAL-00071" summary="testing values with the actual robot">
       <created>1603480771742</created>
@@ -407,7 +387,28 @@
       <option name="project" value="LOCAL" />
       <updated>1603731063051</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="fixed typos in lib file">
+      <created>1603731116416</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1603731116416</updated>
+    </task>
+    <task id="LOCAL-00118" summary="fixed typos in lib file">
+      <created>1603731213204</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1603731213204</updated>
+    </task>
+    <task id="LOCAL-00119" summary="fixed typos in lib file">
+      <created>1603731326391</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1603731326391</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,11 +447,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="168" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602802761443" />
-    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1603731062468">
+    <state x="391" y="0" key="CommitChangelistDialog2" timestamp="1603731562758">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1603505470211" />
-    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1603731062468" />
+    <state x="391" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1603731562758" />
     <state x="147" y="65" key="DiffContextDialog" timestamp="1603729852600">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -483,11 +484,11 @@
     </state>
     <state width="1493" height="444" key="GridCell.Tab.0.right/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1603242542218" />
     <state width="1493" height="444" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603297472954" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603731064724">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603731328191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.-360.2560.1400@0.0.1536.824" timestamp="1603505471738" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603731064724" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603731328191" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603231366268">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
