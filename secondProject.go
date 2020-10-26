@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	SPEED       = 160
+	SPEED       = 40
 	SENSOR_SIZE = 4 // We use to discard extra cm in our final length calculation
 )
 
